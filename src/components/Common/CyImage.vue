@@ -1,5 +1,5 @@
 <template>
-  <div class="cy-image" :style="imgStyle" ref="cyImage">
+  <div ref="cyImage" class="cy-image" :style="imgStyle">
     <el-image
       ref="elIamge"
       :src="imgSrc"
@@ -11,16 +11,10 @@
       @load="loadSuccess"
     >
       <div slot="placeholder" class="cy-image__placeholder">
-        <img
-          src="../../assets/images/fail-img.png"
-          :style="`width: ${imgWidth}px;`"
-        />
+        <img src="../../assets/images/fail-img.png" :style="`width: ${imgWidth}px;`" />
       </div>
       <div slot="error" class="cy-image__error">
-        <img
-          src="../../assets/images/fail-img.png"
-          :style="`width: ${imgWidth}px;`"
-        />
+        <img src="../../assets/images/fail-img.png" :style="`width: ${imgWidth}px;`" />
       </div>
     </el-image>
     <div v-if="icon" class="cy-image__icon" :style="{ borderRadius: radius }">
@@ -40,7 +34,7 @@ export default {
       type: String,
       default: ''
     },
-    //图片上的图标，false无图标
+    // 图片上的图标，false无图标
     icon: {
       type: [String, Boolean],
       default: false
@@ -50,22 +44,22 @@ export default {
       type: String,
       default: '5px'
     },
-    //图标的尺寸
+    // 图标的尺寸
     size: {
       type: Number,
       default: 16
     },
-    //图片的比例 高/宽 ,借助这个算图片的高度
+    // 图片的比例 高/宽 ,借助这个算图片的高度
     ratio: {
       type: Number,
       default: 1.78
     },
-    //图片是否可以点击预览
+    // 图片是否可以点击预览
     preview: {
       type: [Boolean, Array],
       default: false
     },
-    //图片的宽度，不传通过js获取
+    // 图片的宽度，不传通过js获取
     width: {
       type: Number,
       default: 0
@@ -96,7 +90,7 @@ export default {
       return this.$refs.cyImage
     },
     imgStyle() {
-      let style = {
+      const style = {
         borderRadius: this.radius
       }
       this.width && (style.width = this.width + 'px')
@@ -119,8 +113,8 @@ export default {
   },
   methods: {
     loadSuccess(e) {
-      let img = e.target || {}
-      let ratio = getRatio({
+      const img = e.target || {}
+      const ratio = getRatio({
         width: img.naturalWidth,
         height: img.naturalHeight
       })
@@ -146,7 +140,7 @@ export default {
       }
 
       if (width) {
-        let height = Math.round(width * this.ratio)
+        const height = Math.round(width * this.ratio)
         if (this.ratio > 1) {
           this.imgWidth = width * 0.4
         } else {

@@ -3,13 +3,8 @@
   <div class="cy-table">
     <div v-if="$slots.filter" class="cy-table__fifter card">
       <!-- 表格筛选区域 -->
-      <el-form
-        :model="filterData"
-        :inline="true"
-        class="cy-table__form"
-        :size="size"
-      >
-        <slot name="filter"></slot>
+      <el-form :model="filterData" :inline="true" class="cy-table__form" :size="size">
+        <slot name="filter" />
         <el-form-item>
           <el-button
             :size="size"
@@ -30,10 +25,10 @@
         flex="align:center justify:between"
       >
         <div class="cy-table__btn-left">
-          <slot name="btnLeft"></slot>
+          <slot name="btnLeft" />
         </div>
         <div>
-          <slot name="btnRight"></slot>
+          <slot name="btnRight" />
         </div>
       </div>
       <el-table
@@ -111,7 +106,7 @@ export default {
         return {}
       }
     },
-    //表头是否使用sticky布局
+    // 表头是否使用sticky布局
     sticky: {
       type: Boolean,
       default: true

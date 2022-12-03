@@ -5,7 +5,7 @@
         {{ label }}
       </div>
     </slot>
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
@@ -52,7 +52,7 @@ export default {
   &.sticky {
     position: sticky;
     top: $headerHeight;
-	z-index: 9;
+    z-index: 9;
   }
 }
 </style>

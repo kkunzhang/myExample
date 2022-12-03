@@ -2,15 +2,15 @@
   <div class="cy-loading-wrap" flex="align:center justify:center">
     <div class="cy-loading">
       <span
-        class="dot"
         v-for="item in num"
         :key="item"
+        class="dot"
         :style="{
           backgroundColor: color,
           width: size + 'px',
           height: size + 'px'
         }"
-      ></span>
+      />
     </div>
   </div>
 </template>
@@ -25,12 +25,12 @@ export default {
       type: Number,
       default: 3
     },
-    //圆点的尺寸 px
+    // 圆点的尺寸 px
     size: {
       type: Number,
       default: 12
     },
-    //圆点的颜色
+    // 圆点的颜色
     color: {
       type: String,
       default: '#000000'

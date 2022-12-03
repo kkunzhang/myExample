@@ -1,7 +1,7 @@
 <template>
   <div
-    class="cy-text"
     ref="cyText"
+    class="cy-text"
     :style="textStyle"
     @mouseenter="mouseenter"
     @mouseleave="mouseleave"
@@ -21,9 +21,16 @@ export default {
       default: ''
     },
     row: {
-      //最多显示几行，超过后会...隐藏 为0时不隐藏
+      // 最多显示几行，超过后会...隐藏 为0时不隐藏
       type: [Number, String],
       default: 0
+    }
+  },
+  data() {
+    return {
+      isShowHover: false,
+      textStyle: {},
+      div: null
     }
   },
   computed: {
@@ -32,13 +39,6 @@ export default {
     },
     scrollWrap() {
       return getScrollContainer(this.$refs.cyText, true)
-    }
-  },
-  data() {
-    return {
-      isShowHover: false,
-      textStyle: {},
-      div: null
     }
   },
   watch: {
@@ -74,9 +74,8 @@ export default {
       }
     },
     getStyle(val) {
-      let lineHeight =
-        getComputedStyle(this.cyText).lineHeight.replace('px', '') - 0 || 20
-      let height = getComputedStyle(this.cyText).height.replace('px', '') - 0
+      const lineHeight = getComputedStyle(this.cyText).lineHeight.replace('px', '') - 0 || 20
+      const height = getComputedStyle(this.cyText).height.replace('px', '') - 0
       if (height > lineHeight * val) {
         this.isShowHover = true
         this.textStyle = {
@@ -100,9 +99,9 @@ export default {
         return
       }
       this.div.innerHTML = this.value
-      let box = e.target.getBoundingClientRect()
-      let divRect = this.div.getBoundingClientRect()
-      let windowHeight = innerHeight || document.documentElement.clientHeight
+      const box = e.target.getBoundingClientRect()
+      const divRect = this.div.getBoundingClientRect()
+      const windowHeight = innerHeight || document.documentElement.clientHeight
       let top = ''
       let left = ''
       left = box.left + (box.width - divRect.width) / 2 + 'px'

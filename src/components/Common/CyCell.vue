@@ -40,7 +40,7 @@ export default {
       type: Number,
       default: 5
     },
-    //右边的内容，默认插槽
+    // 右边的内容，默认插槽
     value: {
       type: [String, Number],
       default: ''
@@ -48,7 +48,7 @@ export default {
   },
   computed: {
     leftStyle() {
-      let style = {}
+      const style = {}
       if (this.type === 'left') {
         style.marginRight = this.gap + 'px'
         if (this.width) {
@@ -58,7 +58,7 @@ export default {
       return style
     },
     rightStyle() {
-      let style = {}
+      const style = {}
       if (this.type === 'right') {
         style.marginLeft = this.gap + 'px'
         if (this.width) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="anchor clearfix" ref="anchor">
+  <div ref="anchor" class="anchor clearfix">
     <ul class="anchor__nav card">
       <li
         v-for="(item, key) in anchorNavData"
@@ -7,12 +7,12 @@
         :class="{ active: value === key, disabled: item.disabled }"
         @click="arrive(key, item)"
       >
-        <i v-if="item.icon" :class="item.icon"></i>
+        <i v-if="item.icon" :class="item.icon" />
         <span class="ellipsis" :title="item.label">{{ item.label }}</span>
       </li>
     </ul>
     <div class="anchor__content">
-      <slot></slot>
+      <slot />
     </div>
   </div>
 </template>
@@ -23,7 +23,7 @@ import { getScrollContainer } from '@/utils/dom'
 export default {
   name: 'Anchor',
   props: {
-    // 当前楼层
+    // 当前楼层 这个value就是v-mode绑定的值
     value: {
       type: String,
       default: ''
@@ -33,7 +33,7 @@ export default {
       type: String,
       default: ''
     },
-    //固定（position: fixed）在滚动区域类的高度
+    // 固定（position: fixed）在滚动区域类的高度
     fixedHeight: {
       type: Number,
       default: 54
@@ -41,9 +41,9 @@ export default {
   },
   data() {
     return {
-      anchorNavData: {}, //电梯楼层高度的映射
+      anchorNavData: {}, // 电梯楼层高度的映射
       scrollFunDebounceFun: utils.vueDebounce('scrollFun', 100),
-      valueType: 1, //当前楼层改变的类型，1是组件传递、按钮直达改变，2是通过滚动监听自动改变
+      valueType: 1, // 当前楼层改变的类型，1是组件传递、按钮直达改变，2是通过滚动监听自动改变
       children: []
     }
   },
@@ -58,11 +58,12 @@ export default {
   },
   watch: {
     // 监听楼层变化，当为父组件传递，或者按钮直达时，手动滚动到当前楼层
+
     value(val) {
+      console.log(val, 'xxxx')
+
       if (this.valueType === 1) {
-        const scrollTop = this.getAnchorItemInfo(
-          this.anchorNavData[val]?.dom
-        ).scrollTop
+        const scrollTop = this.getAnchorItemInfo(this.anchorNavData[val]?.dom).scrollTop
         this.scrollElement(scrollTop)
       } else {
         this.valueType = 1
@@ -70,13 +71,13 @@ export default {
     }
   },
   mounted() {
+    console.log(this.value, '9999')
+
     this.calcChildren()
     this.init()
     let scrollTop = 0
     if (this.anchorNavData[this.value]) {
-      scrollTop = this.getAnchorItemInfo(
-        this.anchorNavData[this.value].dom
-      ).scrollTop
+      scrollTop = this.getAnchorItemInfo(this.anchorNavData[this.value].dom).scrollTop
       this.scrollElement(scrollTop)
     } else {
       scrollTop = this.getScrollTop(this.scrollWrap)
@@ -89,16 +90,16 @@ export default {
   },
   methods: {
     calcChildren() {
-      let children = this.$slots.default.map((item) => item.componentInstance)
+      const children = this.$slots.default.map((item) => item.componentInstance)
       this.children = treeDeep(children)
+      console.log(children)
+
       function treeDeep(data, res = []) {
         data.forEach((item) => {
           if (item.$vnode.tag.indexOf('AnchorItem') > -1) {
             res.push(item)
           } else {
-            item.$children &&
-              item.$children.length &&
-              treeDeep(item.$children, res)
+            item.$children && item.$children.length && treeDeep(item.$children, res)
           }
         })
         return res
@@ -147,7 +148,7 @@ export default {
       }
     },
 
-    //滚动的处理函数
+    // 滚动的处理函数
     scrollFun(e) {
       const scrollTop = this.getScrollTop(e.target)
       this.getAnchorValue(scrollTop)
@@ -158,7 +159,7 @@ export default {
     },
     // 根据当前高度获取楼层位置，通过计算每个元素在可视区域的高度，与自身实际高度的占比（全部都不在可视区域为0，全部都在则为1），判断当前处在那个楼层
     getAnchorValue(scrollTop) {
-      let obj = {}
+      const obj = {}
       for (let i = 0; i < this.children.length; i++) {
         const item = this.getAnchorItemInfo(this.children[i].$el)
         const scrollWrapHeight = this.scrollWrap.getBoundingClientRect
@@ -184,7 +185,7 @@ export default {
       // 如果占比相同,则取第一个 后期可以修改下 向下滚动取第一个,向上滚动取最后一个
       this.$emit('input', obj[maxKey][0])
     },
-    //直达楼层
+    // 直达楼层
     arrive(name, item) {
       if (name === this.value || item.disabled) {
         return

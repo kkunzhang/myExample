@@ -8,16 +8,16 @@ import CyDatePicker from './CyDatePicker'
 import CyLoading from './CyLoading'
 import CyTreeSelect from './CyTreeSelect'
 const component = {
-    install: function(Vue){
-        Vue.component('CyCell',CyCell)
-        Vue.component('CyImage',CyImage)
-        Vue.component('CyTable',CyTable)
-        Vue.component('CyText',CyText)
-        Vue.component('CyAnchor',CyAnchor)
-        Vue.component('CyAnchorItem',CyAnchorItem)
-        Vue.component('CyDatePicker',CyDatePicker)
-        Vue.component('CyLoading',CyLoading)
-        Vue.component('CyTreeSelect',CyTreeSelect)
-    }
+  install: function(Vue) {
+    Vue.component('CyCell', CyCell)
+    Vue.component('CyImage', CyImage)
+    Vue.component('CyTable', CyTable)
+    Vue.component('CyText', CyText)
+    Vue.component('CyAnchor', CyAnchor)
+    Vue.component('CyAnchorItem', CyAnchorItem)
+    Vue.component('CyDatePicker', CyDatePicker)
+    Vue.component('CyLoading', CyLoading)
+    Vue.component('CyTreeSelect', CyTreeSelect)
+  }
 }
 export default component

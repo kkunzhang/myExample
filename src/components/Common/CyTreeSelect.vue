@@ -28,7 +28,7 @@
         :expand-on-click-node="false"
         :filter-node-method="filterNode"
         @node-click="handleNodeClick"
-      ></el-tree>
+      />
     </el-option>
   </el-select>
 </template>
@@ -65,7 +65,7 @@ export default {
     // tree的props配置
     props: {
       type: Object,
-      default: function () {
+      default: function() {
         return {
           label: 'label',
           children: 'children'
@@ -100,7 +100,7 @@ export default {
   methods: {
     // 是否为空
     isEmpty(val) {
-      for (let key in val) {
+      for (const key in val) {
         return false
       }
       return true

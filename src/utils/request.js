@@ -59,7 +59,7 @@ service.interceptors.request.use(
     return config
   },
   error => {
-		console.log(error)
+    console.log(error)
     return Promise.reject(error)
   }
 )
@@ -108,7 +108,7 @@ service.interceptors.response.use(
     }
   },
   error => {
-		console.log(error)
+    console.log(error)
     store.commit('app/CHANGE_COUNT', 0)
     store.commit('app/CLOSE_LOADING')
     const res = error.response || { data: {}}
@@ -125,8 +125,8 @@ service.interceptors.response.use(
             location.reload()
           })
         }).catch(() => {
-					lock = false
-				})
+          lock = false
+        })
       }
     } else {
       Message.error({
